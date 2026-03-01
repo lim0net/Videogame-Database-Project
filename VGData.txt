@@ -1,0 +1,5437 @@
+SQL> 
+SQL> CREATE TABLE Developers (
+  2  	 DevID INT PRIMARY KEY,
+  3  	 Dname VARCHAR(100) NOT NULL,
+  4  	 yearFounded INT,
+  5  	 Dcountry VARCHAR(50)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE Platforms (
+  2  	 PlatID INT PRIMARY KEY,
+  3  	 Gname VARCHAR(100) NOT NULL
+  4  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE Games (
+  2  	 GID INT PRIMARY KEY,
+  3  	 Gname VARCHAR(100) NOT NULL,
+  4  	 releaseDate DATE,
+  5  	 Category VARCHAR(50),
+  6  	 ESRB VARCHAR(5),
+  7  	 PlatID INT,
+  8  	 DevID INT,
+  9  	 FOREIGN KEY (PlatID) REFERENCES Platforms(PlatID),
+ 10  	 FOREIGN KEY (DevID) REFERENCES Developers(DevID)
+ 11  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE GameSales (
+  2  	 GID INT PRIMARY KEY,
+  3  	 unitsSold DECIMAL(6,2),
+  4  	 revenue DECIMAL(10,2),
+  5  	 FOREIGN KEY (GID) REFERENCES Games(GID)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE GameRatings (
+  2  	 GID INT PRIMARY KEY,
+  3  	 Rating INT CHECK (Rating BETWEEN 1 AND 10),
+  4  	 FOREIGN KEY (GID) REFERENCES Games(GID)
+  5  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE Players (
+  2  	 PlayID INT PRIMARY KEY,
+  3  	 Pname VARCHAR(100),
+  4  	 Age INT,
+  5  	 PUser VARCHAR(50) UNIQUE,
+  6  	 PCountry VARCHAR(50),
+  7  	 TotalHoursPlayed INT
+  8  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE Ownership (
+  2  	 PlayID INT PRIMARY KEY,
+  3  	 GamesOwned INT,
+  4  	 FOREIGN KEY (PlayID) REFERENCES Players(PlayID)
+  5  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> CREATE TABLE PlayerGameOwnership (
+  2  	 PlayID INT,
+  3  	 GID INT,
+  4  	 PRIMARY KEY (PlayID, GID),
+  5  	 FOREIGN KEY (PlayID) REFERENCES Players(PlayID),
+  6  	 FOREIGN KEY (GID) REFERENCES Games(GID)
+  7  );
+
+Table created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 
+SQL> @U:\VGDatabase\insert_VGData.sql
+SQL> --Game Developer Table
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (1, 'Nintendo', 1889, 'Japan');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (2, 'Rockstar Games', 1998, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (3, 'CD Projekt Red', 2002, 'Poland');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (4, 'Santa Monica Studio', 1999, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (5, 'Mojang', 2009, 'Sweden');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (6, 'Epic Games', 1991, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (7, 'Blizzard Entertainment', 1991, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (8, 'Respawn Entertainment', 2010, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (9, 'Infinity Ward', 2002, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (10, 'Supergiant Games', 2009, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (11, 'ConcernedApe', 2012, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (12, 'Matt Makes Games', 2012, 'Canada');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (13, 'Team Cherry', 2015, 'Australia');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (14, 'Atlus', 1986, 'Japan');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (15, 'FromSoftware', 1986, 'Japan');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (16, 'Naughty Dog', 1984, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (17, '343 Industries', 2007, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (18, 'BioWare', 1995, 'Canada');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (19, 'Bethesda Game Studios', 2001, 'USA');
+
+1 row created.
+
+SQL> INSERT INTO Developers (DevID, Dname, yearFounded, Dcountry) VALUES (20, 'Valve', 1996, 'USA');
+
+1 row created.
+
+SQL> 
+SQL> --Game Platform Table
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (1, 'PlayStation');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (2, 'PlayStation 2');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (3, 'PlayStation 3');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (4, 'PlayStation 4');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (5, 'PlayStation 5');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (6, 'Xbox');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (7, 'Xbox 360');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (8, 'Xbox One');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (9, 'Xbox Series X/S');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (10, 'Nintendo Entertainment System (NES)');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (11, 'Super Nintendo Entertainment System (SNES)');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (12, 'Nintendo 64');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (13, 'GameCube');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (14, 'Wii');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (15, 'Wii U');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (16, 'Nintendo Switch');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (17, 'Game Boy');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (18, 'Game Boy Color');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (19, 'Game Boy Advance');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (20, 'Nintendo DS');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (21, 'Nintendo 3DS');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (22, 'PlayStation Portable (PSP)');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (23, 'PlayStation Vita');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (24, 'PC');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (25, 'Mac OS');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (26, 'Linux');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (27, 'iOS');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (28, 'Android');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (29, 'Google Stadia');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (30, 'Amazon Luna');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (31, 'Steam Deck');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (32, 'Atari 2600');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (33, 'Sega Genesis');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (34, 'Sega Saturn');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (35, 'Dreamcast');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (36, 'Neo Geo');
+
+1 row created.
+
+SQL> INSERT INTO Platforms (PlatID, Gname) VALUES (37, 'Commodore 64');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> --Games Table
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (1, 'Super Mario Bros.', TO_DATE('1985-09-13', 'YYYY-MM-DD'), 'Platform', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (2, 'The Legend of Zelda', TO_DATE('1986-02-21', 'YYYY-MM-DD'), 'Action-adventure', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (3, 'Super Mario 64', TO_DATE('1996-06-23', 'YYYY-MM-DD'), 'Platform', 'E', 12, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (4, 'Super Mario Galaxy', TO_DATE('2007-11-12', 'YYYY-MM-DD'), 'Platform', 'E', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (5, 'Super Mario Odyssey', TO_DATE('2017-10-27', 'YYYY-MM-DD'), 'Platform', 'E10+', 16, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (6, 'The Legend of Zelda: Ocarina of Time', TO_DATE('1998-11-21', 'YYYY-MM-DD'), 'Action-adventure', 'E', 12, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (7, 'The Legend of Zelda: Breath of the Wild', TO_DATE('2017-03-03', 'YYYY-MM-DD'), 'Action-adventure', 'E10+', 16, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (8, 'Metroid Prime', TO_DATE('2002-11-17', 'YYYY-MM-DD'), 'Action-adventure', 'T', 13, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (9, 'Super Smash Bros. Melee', TO_DATE('2001-11-21', 'YYYY-MM-DD'), 'Fighting', 'T', 13, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (10, 'Super Mario World', TO_DATE('1990-11-21', 'YYYY-MM-DD'), 'Platform', 'E', 11, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (11, 'Link''s Awakening', TO_DATE('1993-08-06', 'YYYY-MM-DD'), 'Action-adventure', 'E', 17, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (12, 'Mario Kart 8 Deluxe', TO_DATE('2017-04-28', 'YYYY-MM-DD'), 'Racing', 'E', 16, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (13, 'Animal Crossing: New Horizons', TO_DATE('2020-03-20', 'YYYY-MM-DD'), 'Social simulation', 'E', 16, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (14, 'Splatoon 2', TO_DATE('2017-07-21', 'YYYY-MM-DD'), 'Shooter', 'E10+', 16, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (15, 'Luigi''s Mansion', TO_DATE('2001-05-14', 'YYYY-MM-DD'), 'Action-adventure', 'E10+', 13, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (16, 'Mario Kart Wii', TO_DATE('2008-04-10', 'YYYY-MM-DD'), 'Racing', 'E', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (17, 'Animal Crossing: New Leaf', TO_DATE('2012-11-08', 'YYYY-MM-DD'), 'Social simulation', 'E', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (18, 'The Legend of Zelda: Twilight Princess', TO_DATE('2006-11-19', 'YYYY-MM-DD'), 'Action-adventure', 'E10+', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (19, 'Super Mario Galaxy 2', TO_DATE('2010-05-23', 'YYYY-MM-DD'), 'Platform', 'E', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (20, 'Metroid Prime 2: Echoes', TO_DATE('2004-11-15', 'YYYY-MM-DD'), 'Action-adventure', 'T', 13, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (21, 'The Legend of Zelda: The Wind Waker', TO_DATE('2003-03-24', 'YYYY-MM-DD'), 'Action-adventure', 'E', 13, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (22, 'Super Smash Bros. Ultimate', TO_DATE('2018-12-07', 'YYYY-MM-DD'), 'Fighting', 'E10+', 16, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (23, 'Super Smash Bros. Brawl', TO_DATE('2008-01-31', 'YYYY-MM-DD'), 'Fighting', 'T', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (24, 'Mario Kart 64', TO_DATE('1996-12-14', 'YYYY-MM-DD'), 'Racing', 'E', 12, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (25, 'Super Metroid', TO_DATE('1994-03-19', 'YYYY-MM-DD'), 'Action-adventure', 'E', 11, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (26, 'Super Mario Sunshine', TO_DATE('2002-07-19', 'YYYY-MM-DD'), 'Platform', 'E', 13, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (27, 'Nintendo: Wii Sports', TO_DATE('2006-11-19', 'YYYY-MM-DD'), 'Sports', 'E', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (28, 'Wii Sports Resort', TO_DATE('2009-07-26', 'YYYY-MM-DD'), 'Sports', 'E', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (29, 'Animal Crossing', TO_DATE('2002-04-14', 'YYYY-MM-DD'), 'Social simulation', 'E', 13, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (30, 'The Legend of Zelda: Majora''s Mask', TO_DATE('2000-04-27', 'YYYY-MM-DD'), 'Action-adventure', 'T', 12, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (31, 'New Super Mario Bros.', TO_DATE('2006-05-15', 'YYYY-MM-DD'), 'Platform', 'E', 20, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (32, 'The Legend of Zelda: Phantom Hourglass', TO_DATE('2007-06-23', 'YYYY-MM-DD'), 'Action-adventure', 'E', 20, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (33, 'Duck Hunt', TO_DATE('1984-04-21', 'YYYY-MM-DD'), 'Light gun shooter', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (34, 'Punch-Out!!', TO_DATE('1987-08-18', 'YYYY-MM-DD'), 'Sports', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (35, 'Kid Icarus', TO_DATE('1987-12-19', 'YYYY-MM-DD'), 'Platform', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (36, 'Excitebike', TO_DATE('1984-02-10', 'YYYY-MM-DD'), 'Racing', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (37, 'Balloon Fight', TO_DATE('1985-01-21', 'YYYY-MM-DD'), 'Action', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (38, 'Ice Climber', TO_DATE('1985-10-01', 'YYYY-MM-DD'), 'Platform', 'E', 10, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (39, 'The Legend of Zelda: Link''s Crossbow Training', TO_DATE('2007-12-06', 'YYYY-MM-DD'), 'First-person shooter', 'E', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (40, 'New Super Mario Bros. Wii', TO_DATE('2009-11-15', 'YYYY-MM-DD'), 'Platform', 'E', 14, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (41, 'Luigi''s Mansion: Dark Moon', TO_DATE('2013-03-20', 'YYYY-MM-DD'), 'Action-adventure', 'T', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (42, 'New Super Mario Bros. 2', TO_DATE('2012-08-17', 'YYYY-MM-DD'), 'Platform', 'E', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (43, 'New Super Mario Bros. U', TO_DATE('2012-11-18', 'YYYY-MM-DD'), 'Platform', 'E', 15, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (44, 'Nintendogs', TO_DATE('2005-04-21', 'YYYY-MM-DD'), 'Simulation', 'E', 19, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (45, 'The Legend of Zelda: Spirit Tracks', TO_DATE('2009-12-07', 'YYYY-MM-DD'), 'Action-adventure', 'E10+', 20, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (46, 'Grand Theft Auto V', TO_DATE('2013-09-17', 'YYYY-MM-DD'), 'Action-adventure', 'M', 4, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (47, 'Grand Theft Auto: San Andreas', TO_DATE('2004-10-26', 'YYYY-MM-DD'), 'Action-adventure', 'M', 2, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (48, 'Red Dead Redemption 2', TO_DATE('2018-10-26', 'YYYY-MM-DD'), 'Action-adventure', 'M', 4, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (49, 'Red Dead Redemption', TO_DATE('2010-05-18', 'YYYY-MM-DD'), 'Action-adventure', 'M', 3, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (50, 'L.A. Noire', TO_DATE('2011-05-17', 'YYYY-MM-DD'), 'Action-adventure', 'M', 3, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (51, 'Grand Theft Auto IV', TO_DATE('2008-04-29', 'YYYY-MM-DD'), 'Action-adventure', 'M', 3, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (52, 'Bully: Scholarship Edition', TO_DATE('2008-03-04', 'YYYY-MM-DD'), 'Action-adventure', 'T', 7, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (53, 'Max Payne 3', TO_DATE('2012-05-15', 'YYYY-MM-DD'), 'Third-person shooter', 'M', 7, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (54, 'Grand Theft Auto: Vice City', TO_DATE('2002-10-27', 'YYYY-MM-DD'), 'Action-adventure', 'M', 2, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (55, 'Manhunt 2', TO_DATE('2007-10-29', 'YYYY-MM-DD'), 'Stealth', 'M', 7, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (56, 'Midnight Club: Los Angeles', TO_DATE('2008-10-22', 'YYYY-MM-DD'), 'Racing', 'T', 2, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (57, 'Grand Theft Auto: Chinatown Wars', TO_DATE('2009-03-17', 'YYYY-MM-DD'), 'Action-adventure', 'T', 22, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (58, 'Grand Theft Auto: Liberty City Stories', TO_DATE('2005-10-24', 'YYYY-MM-DD'), 'Action-adventure', 'T', 22, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (59, 'Grand Theft Auto: Vice City Stories', TO_DATE('2006-10-31', 'YYYY-MM-DD'), 'Action-adventure', 'T', 22, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (60, 'Midnight Club 3: DUB Edition', TO_DATE('2005-10-10', 'YYYY-MM-DD'), 'Racing', 'T', 2, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (61, 'The Warriors', TO_DATE('2005-05-24', 'YYYY-MM-DD'), 'Beat ''em up', 'T', 2, 2);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (62, 'The Witcher 3: Wild Hunt', TO_DATE('2015-05-19', 'YYYY-MM-DD'), 'Action RPG', 'M', 24, 3);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (63, 'The Witcher 2: Assassins of Kings', TO_DATE('2011-05-17', 'YYYY-MM-DD'), 'Action RPG', 'M', 24, 3);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (64, 'The Witcher', TO_DATE('2007-10-26', 'YYYY-MM-DD'), 'Action RPG', 'T', 24, 3);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (65, 'Cyberpunk 2077', TO_DATE('2020-12-10', 'YYYY-MM-DD'), 'Action RPG', 'M', 24, 3);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (66, 'Thronebreaker: The Witcher Tales', TO_DATE('2018-10-23', 'YYYY-MM-DD'), 'Adventure', 'T', 24, 3);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (67, 'God of War (2005)', TO_DATE('2005-03-22', 'YYYY-MM-DD'), 'Action-adventure', 'M', 2, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (68, 'God of War II', TO_DATE('2007-03-13', 'YYYY-MM-DD'), 'Action-adventure', 'M', 2, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (69, 'God of War III', TO_DATE('2010-03-16', 'YYYY-MM-DD'), 'Action-adventure', 'M', 3, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (70, 'God of War (2018)', TO_DATE('2018-04-20', 'YYYY-MM-DD'), 'Action-adventure', 'M', 4, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (71, 'God of War Ragnarök', TO_DATE('2022-11-09', 'YYYY-MM-DD'), 'Action-adventure', 'M', 5, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (72, 'God of War: Chains of Olympus', TO_DATE('2008-03-04', 'YYYY-MM-DD'), 'Action-adventure', 'T', 22, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (73, 'God of War: Ghost of Sparta', TO_DATE('2010-10-26', 'YYYY-MM-DD'), 'Action-adventure', 'T', 22, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (74, 'God of War: Ascension', TO_DATE('2013-03-12', 'YYYY-MM-DD'), 'Action-adventure', 'M', 3, 4);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (75, 'Minecraft', TO_DATE('2011-11-18', 'YYYY-MM-DD'), 'Sandbox', 'E10+', 24, 5);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (76, 'Minecraft Dungeons', TO_DATE('2020-05-26', 'YYYY-MM-DD'), 'Action-adventure', 'T', 24, 5);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (77, 'Fortnite', TO_DATE('2017-07-25', 'YYYY-MM-DD'), 'Battle royale', 'T', 24, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (78, 'Gears of War', TO_DATE('2006-11-07', 'YYYY-MM-DD'), 'Third-person shooter', 'M', 6, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (79, 'Gears of War 2', TO_DATE('2008-11-07', 'YYYY-MM-DD'), 'Third-person shooter', 'M', 7, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (80, 'Unreal Tournament', TO_DATE('1999-11-30', 'YYYY-MM-DD'), 'First-person shooter', 'T', 24, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (81, 'Infinity Blade', TO_DATE('2010-12-09', 'YYYY-MM-DD'), 'Action RPG', 'T', 27, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (82, 'Shadow Complex', TO_DATE('2009-08-19', 'YYYY-MM-DD'), 'Metroidvania', 'T', 6, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (83, 'Gears of War 3', TO_DATE('2011-09-20', 'YYYY-MM-DD'), 'Third-person shooter', 'M', 7, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (84, 'Unreal Tournament 2004', TO_DATE('2004-11-30', 'YYYY-MM-DD'), 'First-person shooter', 'T', 24, 6);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (85, 'Overwatch', TO_DATE('2016-05-24', 'YYYY-MM-DD'), 'First-person shooter', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (86, 'Diablo III', TO_DATE('2012-05-15', 'YYYY-MM-DD'), 'Action RPG', 'M', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (87, 'World of Warcraft', TO_DATE('2004-11-23', 'YYYY-MM-DD'), 'MMORPG', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (88, 'StarCraft', TO_DATE('1998-03-31', 'YYYY-MM-DD'), 'Real-time strategy', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (89, 'Warcraft II: Tides of Darkness', TO_DATE('1995-12-09', 'YYYY-MM-DD'), 'Real-time strategy', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (90, 'Warcraft III: Reign of Chaos', TO_DATE('2002-07-03', 'YYYY-MM-DD'), 'Real-time strategy', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (91, 'Hearthstone', TO_DATE('2014-03-11', 'YYYY-MM-DD'), 'Digital collectible card game', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (92, 'Diablo II', TO_DATE('2000-06-29', 'YYYY-MM-DD'), 'Action RPG', 'M', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (93, 'World of Warcraft: The Burning Crusade', TO_DATE('2007-01-16', 'YYYY-MM-DD'), 'MMORPG', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (94, 'Overwatch 2', TO_DATE('2022-10-04', 'YYYY-MM-DD'), 'First-person shooter', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (95, 'Titanfall', TO_DATE('2014-03-11', 'YYYY-MM-DD'), 'First-person shooter', 'M', 8, 8);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (96, 'Titanfall 2', TO_DATE('2016-10-28', 'YYYY-MM-DD'), 'First-person shooter', 'M', 4, 8);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (97, 'Apex Legends', TO_DATE('2019-02-04', 'YYYY-MM-DD'), 'Battle royale', 'T', 24, 8);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (98, 'Star Wars Jedi: Fallen Order', TO_DATE('2019-11-15', 'YYYY-MM-DD'), 'Action-adventure', 'T', 4, 8);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (99, 'Call of Duty 4: Modern Warfare', TO_DATE('2007-11-05', 'YYYY-MM-DD'), 'First-person shooter', 'M', 7, 9);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (100, 'Call of Duty: Modern Warfare 2', TO_DATE('2009-11-10', 'YYYY-MM-DD'), 'First-person shooter', 'M', 7, 9);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (101, 'Call of Duty: Ghosts', TO_DATE('2013-11-05', 'YYYY-MM-DD'), 'First-person shooter', 'M', 7, 9);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (102, 'Call of Duty: Infinite Warfare', TO_DATE('2016-11-04', 'YYYY-MM-DD'), 'First-person shooter', 'M', 4, 9);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (103, 'Call of Duty: Modern Warfare (2019)', TO_DATE('2019-10-25', 'YYYY-MM-DD'), 'First-person shooter', 'M', 4, 9);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (104, 'Bastion', TO_DATE('2011-08-16', 'YYYY-MM-DD'), 'Action RPG', 'T', 24, 10);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (105, 'Transistor', TO_DATE('2014-05-20', 'YYYY-MM-DD'), 'Action RPG', 'T', 24, 10);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (106, 'Pyre', TO_DATE('2017-07-20', 'YYYY-MM-DD'), 'Sports', 'T', 24, 10);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (107, 'Hades', TO_DATE('2020-09-17', 'YYYY-MM-DD'), 'Roguelike', 'T', 24, 10);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (108, 'Stardew Valley', TO_DATE('2016-02-26', 'YYYY-MM-DD'), 'Simulation', 'E', 24, 11);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (109, 'Celeste', TO_DATE('2018-01-25', 'YYYY-MM-DD'), 'Platform', 'T', 24, 12);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (110, 'Hollow Knight', TO_DATE('2017-02-24', 'YYYY-MM-DD'), 'Metroidvania', 'T', 24, 13);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (111, 'Persona 5', TO_DATE('2016-09-15', 'YYYY-MM-DD'), 'JRPG', 'M', 4, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (112, 'Persona 4', TO_DATE('2008-07-10', 'YYYY-MM-DD'), 'JRPG', 'T', 2, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (113, 'Persona 3', TO_DATE('2006-07-13', 'YYYY-MM-DD'), 'JRPG', 'T', 2, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (114, 'Shin Megami Tensei', TO_DATE('1992-10-30', 'YYYY-MM-DD'), 'JRPG', 'T', 11, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (115, 'Catherine', TO_DATE('2011-02-15', 'YYYY-MM-DD'), 'Puzzle', 'M', 3, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (116, 'Persona 4 Golden', TO_DATE('2012-06-14', 'YYYY-MM-DD'), 'JRPG', 'T', 25, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (117, 'Persona 5 Royal', TO_DATE('2019-10-31', 'YYYY-MM-DD'), 'JRPG', 'M', 4, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (118, 'Persona Q: Shadow of the Labyrinth', TO_DATE('2014-06-04', 'YYYY-MM-DD'), 'RPG', 'T', 21, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (119, 'Shin Megami Tensei: Nocturne', TO_DATE('2004-02-17', 'YYYY-MM-DD'), 'JRPG', 'T', 2, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (120, 'Persona 3 FES', TO_DATE('2007-04-10', 'YYYY-MM-DD'), 'JRPG', 'T', 2, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (121, 'Persona 5 Strikers', TO_DATE('2020-02-20', 'YYYY-MM-DD'), 'Action RPG', 'T', 24, 14);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (122, 'Dark Souls', TO_DATE('2011-09-22', 'YYYY-MM-DD'), 'Action RPG', 'T', 3, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (123, 'Dark Souls II', TO_DATE('2014-03-11', 'YYYY-MM-DD'), 'Action RPG', 'T', 3, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (124, 'Dark Souls III', TO_DATE('2016-03-24', 'YYYY-MM-DD'), 'Action RPG', 'M', 4, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (125, 'Bloodborne', TO_DATE('2015-03-24', 'YYYY-MM-DD'), 'Action RPG', 'M', 4, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (126, 'Sekiro: Shadows Die Twice', TO_DATE('2019-03-22', 'YYYY-MM-DD'), 'Action-adventure', 'M', 24, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (127, 'Elden Ring', TO_DATE('2022-02-25', 'YYYY-MM-DD'), 'Action RPG', 'M', 5, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (128, 'Armored Core', TO_DATE('1988-07-01', 'YYYY-MM-DD'), 'Action', 'T', 1, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (129, 'Demon''s Souls', TO_DATE('2009-02-05', 'YYYY-MM-DD'), 'Action RPG', 'M', 3, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (130, 'King''s Field', TO_DATE('1994-08-26', 'YYYY-MM-DD'), 'Action RPG', 'T', 1, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (131, 'Tenchu: Stealth Assassins', TO_DATE('1998-06-23', 'YYYY-MM-DD'), 'Action-adventure', 'T', 1, 15);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (132, 'Crash Bandicoot', TO_DATE('1996-09-09', 'YYYY-MM-DD'), 'Platform', 'T', 1, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (133, 'Crash Bandicoot 2: Cortex Strikes Back', TO_DATE('1997-11-09', 'YYYY-MM-DD'), 'Platform', 'T', 1, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (134, 'Crash Bandicoot: Warped', TO_DATE('1998-10-31', 'YYYY-MM-DD'), 'Platform', 'T', 1, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (135, 'Jak and Daxter: The Precursor Legacy', TO_DATE('2001-12-03', 'YYYY-MM-DD'), 'Platform', 'T', 2, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (136, 'Jak II', TO_DATE('2003-10-28', 'YYYY-MM-DD'), 'Platform', 'T', 2, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (137, 'Jak 3', TO_DATE('2004-11-09', 'YYYY-MM-DD'), 'Platform', 'T', 2, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (138, 'Uncharted: Drake''s Fortune', TO_DATE('2007-11-19', 'YYYY-MM-DD'), 'Action-adventure', 'T', 3, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (139, 'Uncharted 2: Among Thieves', TO_DATE('2009-10-13', 'YYYY-MM-DD'), 'Action-adventure', 'T', 3, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (140, 'Uncharted 4: A Thief''s End', TO_DATE('2016-05-10', 'YYYY-MM-DD'), 'Action-adventure', 'T', 4, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (141, 'The Last of Us', TO_DATE('2013-06-14', 'YYYY-MM-DD'), 'Action-adventure', 'M', 3, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (142, 'The Last of Us Part II', TO_DATE('2020-06-19', 'YYYY-MM-DD'), 'Action-adventure', 'M', 4, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (143, 'Uncharted: The Lost Legacy', TO_DATE('2017-08-22', 'YYYY-MM-DD'), 'Action-adventure', 'T', 4, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (144, 'Jak X: Combat Racing', TO_DATE('2005-10-14', 'YYYY-MM-DD'), 'Racing', 'E10+', 2, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (145, 'Jak and Daxter: The Lost Frontier', TO_DATE('2009-10-23', 'YYYY-MM-DD'), 'Action-adventure', 'E10+', 2, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (146, 'The Last of Us: Left Behind', TO_DATE('2014-02-14', 'YYYY-MM-DD'), 'Action-adventure', 'M', 3, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (147, 'Crash Team Racing', TO_DATE('1999-09-30', 'YYYY-MM-DD'), 'Racing', 'E', 1, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (148, 'Uncharted 3: Drake''s Deception', TO_DATE('2011-11-01', 'YYYY-MM-DD'), 'Action-adventure', 'T', 3, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (149, 'Uncharted: Golden Abyss', TO_DATE('2012-11-19', 'YYYY-MM-DD'), 'Action-adventure', 'T', 23, 16);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (150, 'Halo 4', TO_DATE('2012-11-06', 'YYYY-MM-DD'), 'First-person shooter', 'T', 7, 17);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (151, 'Halo 5: Guardians', TO_DATE('2015-10-27', 'YYYY-MM-DD'), 'First-person shooter', 'T', 8, 17);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (152, 'Halo Infinite', TO_DATE('2021-12-08', 'YYYY-MM-DD'), 'First-person shooter', 'T', 9, 17);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (153, 'Halo: The Master Chief Collection', TO_DATE('2014-11-11', 'YYYY-MM-DD'), 'First-person shooter', 'T', 8, 17);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (154, 'Halo 2: Anniversary', TO_DATE('2014-11-11', 'YYYY-MM-DD'), 'First-person shooter', 'T', 8, 17);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (155, 'Halo Wars 2', TO_DATE('2017-02-21', 'YYYY-MM-DD'), 'Real-time strategy', 'T', 8, 17);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (156, 'Mass Effect', TO_DATE('2007-11-20', 'YYYY-MM-DD'), 'Action RPG', 'T', 7, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (157, 'Mass Effect 2', TO_DATE('2010-01-26', 'YYYY-MM-DD'), 'Action RPG', 'T', 7, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (158, 'Mass Effect 3', TO_DATE('2012-03-06', 'YYYY-MM-DD'), 'Action RPG', 'T', 7, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (159, 'Dragon Age: Origins', TO_DATE('2009-11-03', 'YYYY-MM-DD'), 'RPG', 'M', 7, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (160, 'Dragon Age II', TO_DATE('2011-03-08', 'YYYY-MM-DD'), 'Action RPG', 'M', 7, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (161, 'Dragon Age: Inquisition', TO_DATE('2014-11-18', 'YYYY-MM-DD'), 'Action RPG', 'M', 4, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (162, 'Star Wars: Knights of the Old Republic', TO_DATE('2003-11-19', 'YYYY-MM-DD'), 'RPG', 'T', 6, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (163, 'Star Wars: Knights of the Old Republic II', TO_DATE('2004-12-06', 'YYYY-MM-DD'), 'RPG', 'T', 6, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (164, 'Star Wars: The Old Republic', TO_DATE('2011-12-20', 'YYYY-MM-DD'), 'MMORPG', 'T', 24, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (165, 'Mass Effect: Andromeda', TO_DATE('2017-03-21', 'YYYY-MM-DD'), 'Action RPG', 'T', 4, 18);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (166, 'The Elder Scrolls III: Morrowind', TO_DATE('2002-05-01', 'YYYY-MM-DD'), 'Action RPG', 'T', 24, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (167, 'The Elder Scrolls IV: Oblivion', TO_DATE('2006-03-20', 'YYYY-MM-DD'), 'Action RPG', 'T', 7, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (168, 'The Elder Scrolls V: Skyrim', TO_DATE('2011-11-11', 'YYYY-MM-DD'), 'Action RPG', 'T', 7, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (169, 'Fallout 3', TO_DATE('2008-10-28', 'YYYY-MM-DD'), 'Action RPG', 'T', 7, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (170, 'Fallout 4', TO_DATE('2015-11-10', 'YYYY-MM-DD'), 'Action RPG', 'T', 4, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (171, 'The Elder Scrolls II: Daggerfall', TO_DATE('1996-08-31', 'YYYY-MM-DD'), 'Action RPG', 'T', 24, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (172, 'Fallout 76', TO_DATE('2018-11-14', 'YYYY-MM-DD'), 'Action RPG', 'T', 4, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (173, 'The Elder Scrolls: Arena', TO_DATE('1994-03-25', 'YYYY-MM-DD'), 'Action RPG', 'T', 24, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (174, 'Fallout Shelter', TO_DATE('2015-06-14', 'YYYY-MM-DD'), 'Simulation', 'E10+', 27, 19);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (175, 'Half-Life', TO_DATE('1998-11-19', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (176, 'Half-Life 2', TO_DATE('2004-11-16', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (177, 'Half-Life: Alyx', TO_DATE('2020-03-23', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (178, 'Portal', TO_DATE('2007-10-10', 'YYYY-MM-DD'), 'Puzzle-platform', 'T', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (179, 'Portal 2', TO_DATE('2011-04-19', 'YYYY-MM-DD'), 'Puzzle-platform', 'T', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (180, 'Counter-Strike', TO_DATE('2000-11-09', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (181, 'Counter-Strike: Global Offensive', TO_DATE('2012-08-21', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (182, 'Left 4 Dead', TO_DATE('2008-11-17', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (183, 'Left 4 Dead 2', TO_DATE('2009-11-17', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (184, 'Team Fortress 2', TO_DATE('2007-10-10', 'YYYY-MM-DD'), 'First-person shooter', 'T', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (185, 'Dota 2', TO_DATE('2013-07-09', 'YYYY-MM-DD'), 'MOBA', 'T', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (186, 'Half-Life: Opposing Force', TO_DATE('1999-11-19', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (187, 'Half-Life: Blue Shift', TO_DATE('2001-05-12', 'YYYY-MM-DD'), 'First-person shooter', 'M', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (188, 'Day of Defeat', TO_DATE('2003-09-23', 'YYYY-MM-DD'), 'First-person shooter', 'T', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (189, 'StarCraft II: Wings of Liberty', TO_DATE('2010-07-27', 'YYYY-MM-DD'), 'Real-time strategy', 'T', 24, 7);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (190, 'Dota Underlords', TO_DATE('2019-06-20', 'YYYY-MM-DD'), 'Auto battler', 'T', 24, 20);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (191, 'New Super Mario Bros. 2', TO_DATE('2012-08-17', 'YYYY-MM-DD'), 'Platform', 'E', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (192, 'Luigi''s Mansion: Dark Moon', TO_DATE('2013-03-20', 'YYYY-MM-DD'), 'Action-adventure', 'T', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (193, 'New Super Mario Bros. 3', TO_DATE('2013-11-12', 'YYYY-MM-DD'), 'Platform', 'E', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (194, 'Super Mario 3D Land', TO_DATE('2011-11-13', 'YYYY-MM-DD'), 'Platform', 'E', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (195, 'Metroid: Other M', TO_DATE('2010-08-31', 'YYYY-MM-DD'), 'Action-adventure', 'T', 19, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (196, 'Luigi''s Mansion: Dark Moon', TO_DATE('2013-03-20', 'YYYY-MM-DD'), 'Action-adventure', 'T', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (197, 'Super Mario Land', TO_DATE('1989-08-15', 'YYYY-MM-DD'), 'Platform', 'E', 17, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (198, 'Animal Crossing: Wild World', TO_DATE('2005-12-03', 'YYYY-MM-DD'), 'Social simulation', 'E', 21, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (199, 'Super Mario Bros. Deluxe', TO_DATE('1999-06-28', 'YYYY-MM-DD'), 'Platform', 'E', 19, 1);
+
+1 row created.
+
+SQL> INSERT INTO Games (GID, Gname, releaseDate, Category, ESRB, PlatID, DevID) VALUES (200, 'Zelda II: The Adventure of Link', TO_DATE('1987-01-14', 'YYYY-MM-DD'), 'Action-adventure', 'E', 10, 1);
+
+1 row created.
+
+SQL> 
+SQL> --Game Sales Table
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (1.0, 37.77, 2266.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (2.0, 95.10, 5706.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (3.0, 73.33, 4399.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (4.0, 60.07, 3604.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (5.0, 16.02, 961.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (6.0, 16.02, 961.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (7.0, 6.28, 376.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (8.0, 86.68, 5200.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (9.0, 60.31, 3618.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (10.0, 70.95, 4257.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (11.0, 2.55, 153.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (12.0, 97.01, 5820.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (13.0, 83.33, 4999.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (14.0, 21.63, 1297.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (15.0, 18.59, 1115.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (16.0, 18.75, 1125.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (17.0, 30.77, 1846.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (18.0, 52.71, 3162.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (19.0, 43.48, 2608.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (20.0, 29.48, 1768.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (21.0, 61.38, 3682.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (22.0, 14.38, 862.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (23.0, 29.57, 1774.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (24.0, 36.95, 2217.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (25.0, 45.88, 2752.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (26.0, 78.63, 4717.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (27.0, 20.37, 1222.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (28.0, 51.67, 3100.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (29.0, 59.45, 3567.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (30.0, 5.12, 307.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (31.0, 60.95, 3657.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (32.0, 17.47, 1048.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (33.0, 6.97, 418.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (34.0, 94.91, 5694.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (35.0, 96.58, 5794.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (36.0, 80.94, 4856.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (37.0, 30.81, 1848.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (38.0, 10.22, 613.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (39.0, 68.58, 4114.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (40.0, 44.30, 2658.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (41.0, 12.64, 758.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (42.0, 49.77, 2986.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (43.0, 3.92, 235.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (44.0, 90.98, 5458.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (45.0, 26.25, 1575.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (46.0, 66.42, 3985.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (47.0, 31.52, 1891.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (48.0, 52.25, 3135.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (49.0, 54.90, 3294.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (50.0, 18.89, 1133.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (51.0, 96.97, 5818.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (52.0, 77.63, 4657.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (53.0, 93.98, 5638.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (54.0, 89.54, 5372.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (55.0, 59.99, 3599.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (56.0, 92.23, 5533.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (57.0, 9.31, 558.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (58.0, 20.00, 1200.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (59.0, 5.00, 300.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (60.0, 32.87, 1972.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (61.0, 39.17, 2350.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (62.0, 27.50, 1650.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (63.0, 82.96, 4977.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (64.0, 36.00, 2160.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (65.0, 28.45, 1707.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (66.0, 54.50, 3270.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (67.0, 14.52, 871.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (68.0, 80.32, 4819.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (69.0, 7.92, 475.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (70.0, 98.70, 5922.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (71.0, 77.34, 4640.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (72.0, 20.27, 1216.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (73.0, 1.05, 63.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (74.0, 81.64, 4898.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (75.0, 70.83, 4249.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (76.0, 73.04, 4382.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (77.0, 77.24, 4634.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (78.0, 7.87, 472.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (79.0, 36.17, 2170.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (80.0, 12.03, 721.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (81.0, 86.38, 5182.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (82.0, 62.52, 3751.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (83.0, 33.42, 2005.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (84.0, 6.82, 409.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (85.0, 31.44, 1886.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (86.0, 32.86, 1971.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (87.0, 73.10, 4386.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (88.0, 63.94, 3836.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (89.0, 88.78, 5326.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (90.0, 47.49, 2849.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (91.0, 12.40, 744.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (92.0, 71.47, 4288.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (93.0, 76.20, 4572.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (94.0, 56.35, 3381.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (95.0, 77.21, 4632.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (96.0, 49.63, 2977.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (97.0, 52.51, 3150.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (98.0, 43.04, 2582.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (99.0, 3.03, 181.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (100.0, 11.24, 674.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (101.0, 3.63, 217.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (102.0, 63.82, 3829.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (103.0, 31.78, 1906.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (104.0, 51.10, 3066.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (105.0, 90.80, 5448.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (106.0, 25.30, 1518.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (107.0, 41.33, 2479.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (108.0, 75.68, 4540.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (109.0, 23.27, 1396.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (110.0, 8.16, 489.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (111.0, 29.33, 1759.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (112.0, 16.54, 992.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (113.0, 93.00, 5580.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (114.0, 80.91, 4854.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (115.0, 63.52, 3811.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (116.0, 87.21, 5232.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (117.0, 80.47, 4828.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (118.0, 19.06, 1143.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (119.0, 89.31, 5358.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (120.0, 54.16, 3249.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (121.0, 80.84, 4850.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (122.0, 89.66, 5379.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (123.0, 32.14, 1928.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (124.0, 11.45, 687.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (125.0, 23.18, 1390.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (126.0, 43.00, 2580.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (127.0, 81.89, 4913.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (128.0, 86.14, 5168.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (129.0, 1.19, 71.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (130.0, 51.32, 3079.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (131.0, 42.03, 2521.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (132.0, 22.60, 1356.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (133.0, 12.43, 745.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (134.0, 34.09, 2045.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (135.0, 94.32, 5659.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (136.0, 32.66, 1959.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (137.0, 52.12, 3127.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (138.0, 70.45, 4227.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (139.0, 36.68, 2200.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (140.0, 97.19, 5831.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (141.0, 96.26, 5775.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (142.0, 25.55, 1533.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (143.0, 49.98, 2998.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (144.0, 30.44, 1826.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (145.0, 28.84, 1730.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (146.0, 4.17, 250.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (147.0, 61.15, 3669.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (148.0, 50.52, 3031.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (149.0, 5.62, 337.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (150.0, 28.23, 1693.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (151.0, 90.87, 5452.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (152.0, 24.34, 1460.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (153.0, 14.92, 895.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (154.0, 49.20, 2952.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (155.0, 98.57, 5914.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (156.0, 24.58, 1474.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (157.0, 67.38, 4042.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (158.0, 76.28, 4576.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (159.0, 24.14, 1448.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (160.0, 72.96, 4377.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (161.0, 37.09, 2225.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (162.0, 63.41, 3804.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (163.0, 63.54, 3812.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (164.0, 53.81, 3228.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (165.0, 9.48, 568.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (166.0, 83.61, 5016.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (167.0, 32.42, 1945.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (168.0, 19.06, 1143.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (169.0, 4.56, 273.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (170.0, 59.29, 3557.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (171.0, 67.92, 4075.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (172.0, 2.15, 129.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (173.0, 51.45, 3087.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (174.0, 23.04, 1382.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (175.0, 64.69, 3881.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (176.0, 17.85, 1071.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (177.0, 69.25, 4155.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (178.0, 38.98, 2338.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (179.0, 93.70, 5622.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (180.0, 14.18, 850.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (181.0, 34.44, 2066.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (182.0, 11.79, 707.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (183.0, 92.51, 5550.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (184.0, 87.80, 5268.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (185.0, 26.17, 1570.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (186.0, 66.17, 3970.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (187.0, 81.81, 4908.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (188.0, 55.74, 3344.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (189.0, 53.20, 3192.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (190.0, 24.56, 1473.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (191.0, 9.76, 585.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (192.0, 89.77, 5386.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (193.0, 90.09, 5405.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (194.0, 63.49, 3809.40);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (195.0, 34.23, 2053.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (196.0, 35.25, 2115.00);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (197.0, 72.73, 4363.80);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (198.0, 89.76, 5385.60);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (199.0, 88.77, 5326.20);
+
+1 row created.
+
+SQL> INSERT INTO GameSales (GID, unitsSold, revenue) VALUES (200.0, 78.10, 4686.00);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> --Game Rating Table
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (1, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (2, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (3, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (4, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (5, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (6, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (7, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (8, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (9, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (10, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (11, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (12, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (13, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (14, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (15, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (16, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (17, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (18, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (19, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (20, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (21, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (22, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (23, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (24, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (25, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (26, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (27, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (28, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (29, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (30, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (31, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (32, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (33, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (34, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (35, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (36, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (37, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (38, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (39, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (40, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (41, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (42, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (43, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (44, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (45, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (46, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (47, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (48, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (49, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (50, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (51, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (52, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (53, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (54, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (55, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (56, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (57, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (58, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (59, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (60, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (61, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (62, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (63, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (64, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (65, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (66, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (67, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (68, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (69, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (70, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (71, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (72, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (73, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (74, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (75, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (76, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (77, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (78, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (79, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (80, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (81, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (82, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (83, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (84, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (85, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (86, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (87, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (88, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (89, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (90, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (91, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (92, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (93, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (94, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (95, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (96, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (97, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (98, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (99, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (100, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (101, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (102, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (103, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (104, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (105, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (106, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (107, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (108, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (109, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (110, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (111, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (112, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (113, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (114, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (115, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (116, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (117, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (118, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (119, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (120, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (121, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (122, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (123, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (124, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (125, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (126, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (127, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (128, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (129, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (130, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (131, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (132, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (133, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (134, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (135, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (136, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (137, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (138, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (139, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (140, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (141, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (142, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (143, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (144, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (145, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (146, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (147, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (148, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (149, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (150, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (151, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (152, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (153, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (154, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (155, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (156, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (157, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (158, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (159, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (160, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (161, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (162, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (163, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (164, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (165, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (166, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (167, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (168, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (169, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (170, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (171, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (172, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (173, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (174, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (175, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (176, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (177, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (178, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (179, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (180, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (181, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (182, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (183, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (184, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (185, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (186, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (187, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (188, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (189, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (190, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (191, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (192, 6);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (193, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (194, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (195, 7);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (196, 8);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (197, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (198, 9);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (199, 10);
+
+1 row created.
+
+SQL> INSERT INTO GameRatings (GID, Rating) VALUES (200, 9);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> --Player Table
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (1, 'Amber Cooper', 50, 'ambercooper807', 'Canada', 1208);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (2, 'George Smith', 15, 'georgesmith416', 'Japan', 7515);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (3, 'Katherine Byrd', 33, 'katherinebyrd386', 'Australia', 9197);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (4, 'John Brown', 47, 'johnbrown948', 'France', 9022);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (5, 'Gabriel Hill', 23, 'gabrielhill946', 'France', 8888);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (6, 'Alisha Perez', 31, 'alishaperez317', 'South Korea', 2094);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (7, 'Kristen Brown', 27, 'kristenbrown549', 'USA', 8563);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (8, 'Nicole Barber', 41, 'nicolebarber204', 'South Korea', 5726);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (9, 'George Jackson', 38, 'georgejackson446', 'Brazil', 4456);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (10, 'Michelle Mckay', 49, 'mrs.michellemckay981', 'Australia', 4390);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (11, 'Jacob Robinson', 22, 'jacobrobinson610', 'Brazil', 4294);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (12, 'Laura Cooper', 15, 'lauracooper933', 'USA', 4982);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (13, 'Zoe Tucker', 18, 'zoetucker848', 'Japan', 1796);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (14, 'Dennis Powell', 23, 'dennispowell334', 'Australia', 9695);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (15, 'Courtney Nguyen', 27, 'courtneynguyen61', 'Australia', 5783);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (16, 'Gary Harrison', 39, 'dr.garyharrison376', 'UK', 9093);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (17, 'Megan Morales', 30, 'meganmorales859', 'Canada', 1051);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (18, 'Emily Hart', 44, 'emilyhart981', 'Canada', 1157);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (19, 'Cindy Flowers', 48, 'cindyflowers128', 'Sweden', 1964);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (20, 'Jennifer Yang', 39, 'jenniferyang426', 'USA', 4682);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (21, 'Nicole Holmes', 57, 'nicoleholmes654', 'Germany', 2744);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (22, 'Aaron Roman', 58, 'aaronroman871', 'USA', 5731);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (23, 'Thomas Wright', 34, 'thomaswright942', 'UK', 78);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (24, 'Lauren Howell', 49, 'laurenhowell591', 'Germany', 4039);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (25, 'Jessica Durham', 46, 'jessicadurham244', 'Australia', 7737);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (26, 'Ronald Thompson', 27, 'ronaldthompson649', 'Brazil', 9289);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (27, 'Mary Humphrey', 57, 'maryhumphrey322', 'Sweden', 8702);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (28, 'Shannon Jennings', 29, 'shannonjennings808', 'USA', 1905);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (29, 'Diane Norris', 21, 'dianenorris560', 'USA', 2005);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (30, 'Jennifer Wilson', 40, 'jenniferwilson419', 'Brazil', 5858);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (31, 'Christopher Lewis', 53, 'christopherlewis76', 'South Korea', 3588);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (32, 'Samantha Young', 43, 'samanthayoung587', 'Japan', 7170);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (33, 'Jerry Stevens', 49, 'jerrystevens186', 'France', 4273);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (34, 'Brent Stewart', 20, 'brentstewart827', 'Germany', 1803);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (35, 'Elizabeth Davis', 18, 'elizabethdavis633', 'Canada', 3111);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (36, 'George Nelson', 58, 'georgenelson97', 'Sweden', 8794);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (37, 'Tina Duncan', 20, 'tinaduncan486', 'Canada', 6818);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (38, 'Sarah Arnold', 60, 'saraharnold637', 'France', 1916);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (39, 'Randy Keller', 13, 'randykeller525', 'Canada', 180);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (40, 'Cassandra Boyer', 24, 'cassandraboyer668', 'France', 9497);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (41, 'Jennifer Brown', 52, 'jenniferbrown901', 'France', 1544);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (42, 'Donna Dean', 41, 'donnadean725', 'Germany', 5142);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (43, 'Jimmy Mason', 33, 'jimmymason358', 'Sweden', 8915);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (44, 'Richard Mcpherson', 34, 'richardmcpherson170', 'USA', 1899);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (45, 'Tim Short', 36, 'timshort226', 'USA', 5774);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (46, 'Christine Nunez', 60, 'christinenunez413', 'Japan', 4558);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (47, 'Todd Miranda', 18, 'toddmiranda960', 'Brazil', 8915);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (48, 'Daniel Callahan', 27, 'danielcallahan59', 'Germany', 7693);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (49, 'Dr. Isaac Hernandez', 22, 'dr.isaachernandez318', 'Germany', 7375);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (50, 'Andrea Mercer', 17, 'andreamercer154', 'South Korea', 163);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (51, 'Robin Thompson', 23, 'robinthompson392', 'Brazil', 1265);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (52, 'Tiffany Davis MD', 56, 'tiffanydavismd962', 'Sweden', 2722);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (53, 'Joan Haynes', 53, 'joanhaynes180', 'Germany', 5111);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (54, 'Brian Cummings', 20, 'briancummings570', 'Germany', 510);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (55, 'Nicole Ortiz', 41, 'nicoleortiz457', 'Germany', 8110);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (56, 'Joseph Luna', 18, 'josephluna585', 'Japan', 3084);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (57, 'Teresa Stokes', 26, 'teresastokes593', 'Sweden', 5376);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (58, 'Patty Smith', 21, 'pattysmith682', 'USA', 1189);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (59, 'Melissa Nguyen', 23, 'melissanguyen483', 'USA', 8605);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (60, 'Anthony Cole', 39, 'anthonycole422', 'South Korea', 5418);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (61, 'Michelle Hernandez', 51, 'michellehernandez973', 'Australia', 7979);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (62, 'Russell Randall', 25, 'russellrandall375', 'Japan', 8493);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (63, 'Sheri Gonzalez', 28, 'sherigonzalez272', 'France', 7891);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (64, 'Annette Mcintosh', 16, 'annettemcintosh449', 'Brazil', 9830);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (65, 'Tara Arnold', 41, 'taraarnold128', 'South Korea', 5351);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (66, 'Eric Wright', 34, 'ericwright919', 'Japan', 2563);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (67, 'Scott Lane', 47, 'scottlane438', 'Japan', 5251);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (68, 'Ryan Reed', 21, 'ryanreed611', 'Germany', 4719);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (69, 'Amy Acevedo', 46, 'amyacevedo616', 'Brazil', 7297);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (70, 'Jason Brennan', 39, 'jasonbrennan882', 'Brazil', 5886);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (71, 'Denise Gutierrez', 44, 'denisegutierrez210', 'UK', 9910);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (72, 'Brandi Phillips', 43, 'brandiphillips813', 'USA', 7601);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (73, 'Blake Smith', 21, 'blakesmith158', 'Australia', 8694);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (74, 'Angela Moore', 44, 'angelamoore681', 'Brazil', 879);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (75, 'Deanna Tapia', 21, 'deannatapia728', 'Australia', 5041);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (76, 'Adrian Reid', 47, 'adrianreid680', 'South Korea', 2524);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (77, 'Erin Morgan', 37, 'erinmorgan6', 'Australia', 9362);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (78, 'John Bryant', 13, 'johnbryant372', 'Brazil', 2798);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (79, 'Elizabeth Grant', 22, 'elizabethgrant378', 'UK', 9571);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (80, 'Timothy Green', 40, 'timothygreen393', 'South Korea', 2529);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (81, 'Katherine Thompson', 54, 'katherinethompson965', 'Japan', 6892);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (82, 'Nicholas Stephens', 58, 'nicholasstephens15', 'Japan', 7524);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (83, 'Brian Keller', 49, 'briankeller624', 'France', 6953);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (84, 'Tyler Harmon', 60, 'tylerharmon929', 'USA', 4643);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (85, 'Amanda Berry', 20, 'amandaberry67', 'Australia', 7342);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (86, 'David Ramirez', 40, 'davidramirez75', 'UK', 3995);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (87, 'Peter David', 49, 'peterdavid284', 'France', 7157);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (88, 'Kaitlyn Parks', 54, 'kaitlynparks453', 'Brazil', 6847);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (89, 'Ryan Christensen', 56, 'ryanchristensen170', 'Germany', 1993);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (90, 'Beth Stone', 45, 'bethstone616', 'South Korea', 7086);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (91, 'Bruce Williams', 60, 'brucewilliams920', 'Germany', 6876);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (92, 'Eric May', 51, 'ericmay407', 'Canada', 6600);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (93, 'Joseph Thomas', 29, 'josephthomas79', 'France', 9092);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (94, 'William Skinner', 52, 'williamskinner67', 'Japan', 1265);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (95, 'Jill Sandoval', 16, 'jillsandoval524', 'South Korea', 3746);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (96, 'Stephanie Johnson', 44, 'stephaniejohnson347', 'Brazil', 8162);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (97, 'Rodney Dunn', 43, 'rodneydunn543', 'USA', 3890);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (98, 'Brittany Miller', 23, 'brittanymiller467', 'Australia', 2866);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (99, 'Brittany King', 47, 'brittanyking950', 'Japan', 6765);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (100, 'Joseph Greene', 19, 'josephgreene669', 'Sweden', 6391);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (101, 'Barbara Williams', 21, 'barbarawilliams882', 'Brazil', 2457);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (102, 'James Montoya', 25, 'jamesmontoya569', 'Brazil', 2264);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (103, 'Lauren Snow', 50, 'laurensnow20', 'Sweden', 8107);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (104, 'Richard Burton', 60, 'richardburton484', 'France', 7377);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (105, 'Lisa Keith', 24, 'lisakeith841', 'Germany', 2683);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (106, 'Jessica Williams', 17, 'jessicawilliams488', 'USA', 1867);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (107, 'Brian Roman', 27, 'brianroman852', 'USA', 7553);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (108, 'Wesley Mercer', 47, 'wesleymercer665', 'France', 7876);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (109, 'Charles Maxwell', 36, 'charlesmaxwell696', 'UK', 9623);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (110, 'Jose Horton', 45, 'josehorton779', 'UK', 2043);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (111, 'Justin Duncan', 28, 'justinduncan678', 'USA', 1455);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (112, 'Tara Stevens', 33, 'tarastevens907', 'Brazil', 5970);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (113, 'Amy Williams', 21, 'amywilliams912', 'France', 8263);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (114, 'Susan Jensen', 15, 'susanjensen411', 'USA', 83);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (115, 'Hunter Aguirre', 31, 'hunteraguirre509', 'USA', 7609);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (116, 'Christine Patel', 40, 'christinepatel500', 'Sweden', 8817);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (117, 'Aimee Weiss', 44, 'aimeeweiss505', 'Japan', 4799);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (118, 'Paul Schmidt', 30, 'paulschmidt107', 'South Korea', 6864);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (119, 'Jennifer Taylor', 27, 'jennifertaylor735', 'Australia', 2318);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (120, 'Robert Brown', 19, 'robertbrown746', 'South Korea', 1055);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (121, 'Susan Luna', 40, 'susanluna961', 'Japan', 2263);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (122, 'Laura Johnson', 51, 'laurajohnson679', 'France', 7324);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (123, 'Carolyn White', 54, 'carolynwhite452', 'UK', 5726);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (124, 'Brittney Johnson', 52, 'brittneyjohnson716', 'Australia', 8564);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (125, 'Rachel Smith', 50, 'rachelsmith960', 'Brazil', 1102);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (126, 'Dawn Reynolds', 38, 'dawnreynolds294', 'France', 3426);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (127, 'Donald Larson', 30, 'donaldlarson908', 'Canada', 6101);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (128, 'Andrew Bush', 38, 'andrewbush616', 'Sweden', 1410);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (129, 'Randy Jones', 51, 'randyjones508', 'Sweden', 8342);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (130, 'Heather Garcia', 51, 'heathergarcia752', 'Canada', 7174);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (131, 'Scott Wade', 19, 'scottwade989', 'USA', 2798);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (132, 'Matthew Moore', 21, 'matthewmoore916', 'Japan', 7772);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (133, 'Kyle Jones', 59, 'kylejones827', 'Brazil', 3200);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (134, 'Amy Day', 59, 'amyday666', 'Sweden', 852);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (135, 'Elizabeth Harris', 27, 'elizabethharris147', 'Germany', 298);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (136, 'Jennifer Gill', 37, 'jennifergill236', 'Canada', 3589);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (137, 'Alyssa Sweeney', 40, 'alyssasweeney98', 'Australia', 4007);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (138, 'Lindsey Holmes', 42, 'lindseyholmes646', 'Brazil', 1123);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (139, 'Abigail Cunningham', 42, 'abigailcunningham723', 'Germany', 7956);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (140, 'Jennifer Oconnor', 25, 'jenniferoconnor758', 'Germany', 2625);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (141, 'Teresa Archer', 18, 'teresaarcher920', 'Germany', 8801);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (142, 'Robert Cardenas', 55, 'robertcardenas796', 'UK', 2807);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (143, 'Jeff Duncan', 57, 'jeffduncan318', 'Germany', 722);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (144, 'Derek Howell', 41, 'derekhowell71', 'Sweden', 8327);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (145, 'Daniel Tran', 18, 'danieltran478', 'France', 1063);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (146, 'Roberto Dean', 37, 'robertodean405', 'France', 3003);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (147, 'Kenneth Jones', 36, 'kennethjones199', 'France', 2495);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (148, 'Jared Peterson', 35, 'jaredpeterson15', 'France', 992);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (149, 'Ellen Vasquez', 15, 'ellenvasquez166', 'Sweden', 4827);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (150, 'Michael Hicks', 51, 'michaelhicks124', 'Canada', 6069);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (151, 'John Cooper', 13, 'johncooper710', 'USA', 9278);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (152, 'Henry Norman', 28, 'henrynorman459', 'Germany', 2160);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (153, 'Karen Mcgee', 24, 'karenmcgee812', 'France', 7381);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (154, 'Kathleen Foster', 38, 'kathleenfoster763', 'UK', 1485);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (155, 'Margaret Mason', 35, 'margaretmason474', 'Japan', 3448);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (156, 'Julie White MD', 19, 'juliewhitemd414', 'Sweden', 940);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (157, 'Charles Mitchell', 15, 'mr.charlesmitchell264', 'Germany', 2821);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (158, 'Randall Davis', 52, 'randalldavis443', 'France', 9433);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (159, 'Amy Edwards', 57, 'amyedwards988', 'Sweden', 1317);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (160, 'Kevin Jordan', 28, 'kevinjordan248', 'Brazil', 141);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (161, 'Heather Wood', 38, 'heatherwood353', 'Canada', 9649);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (162, 'Daniel Howard', 19, 'danielhoward560', 'Germany', 9548);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (163, 'Kimberly Brown', 46, 'kimberlybrown939', 'South Korea', 4510);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (164, 'Elizabeth Smith', 28, 'elizabethsmith853', 'France', 1766);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (165, 'Robert Thompson', 46, 'robertthompson649', 'Canada', 7046);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (166, 'Michelle Anderson', 13, 'michelleanderson987', 'Australia', 7495);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (167, 'Karen Smith', 19, 'karensmith736', 'USA', 2891);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (168, 'Jessica Logan', 38, 'jessicalogan25', 'Brazil', 605);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (169, 'Jennifer Brewer', 49, 'jenniferbrewer173', 'Sweden', 2672);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (170, 'Krystal Mendez DVM', 23, 'krystalmendezdvm871', 'UK', 1267);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (171, 'Samantha Rojas', 20, 'samantharojas722', 'Germany', 9756);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (172, 'Gregory Castillo', 36, 'gregorycastillo826', 'Sweden', 9636);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (173, 'Andrew Washington', 14, 'andrewwashington207', 'Japan', 9900);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (174, 'Laura Lee', 22, 'lauralee724', 'Australia', 5388);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (175, 'Kyle Garcia', 52, 'kylegarcia878', 'Brazil', 6911);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (176, 'Matthew Garcia', 39, 'matthewgarcia244', 'Canada', 6798);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (177, 'Taylor Potter', 48, 'taylorpotter993', 'USA', 5973);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (178, 'Larry Lewis', 17, 'larrylewis10', 'Canada', 6515);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (179, 'Alison Soto', 15, 'alisonsoto420', 'Australia', 4146);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (180, 'Amanda Molina', 32, 'amandamolina670', 'South Korea', 6589);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (181, 'Glenn Leach', 49, 'glennleach643', 'Brazil', 181);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (182, 'Timothy Hicks', 17, 'timothyhicks922', 'Japan', 2428);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (183, 'Rachel Robinson', 55, 'rachelrobinson9', 'South Korea', 5283);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (184, 'Brian Banks', 13, 'brianbanks152', 'Germany', 1548);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (185, 'Crystal Mendez', 27, 'crystalmendez593', 'Germany', 3586);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (186, 'Jillian Barnes', 34, 'jillianbarnes149', 'Sweden', 8383);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (187, 'Katherine Perez', 14, 'katherineperez101', 'Germany', 4128);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (188, 'Anthony Bruce', 21, 'anthonybruce141', 'Brazil', 8250);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (189, 'Victoria Murillo', 33, 'victoriamurillo446', 'Sweden', 3426);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (190, 'Charles Johnson', 40, 'charlesjohnson289', 'South Korea', 5317);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (191, 'Heather Lopez', 48, 'heatherlopez320', 'France', 5818);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (192, 'David Moore', 37, 'davidmoore495', 'UK', 5011);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (193, 'Robin Powell', 50, 'robinpowell319', 'France', 484);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (194, 'Jeffery Thompson DDS', 49, 'jefferythompsondds699', 'USA', 5938);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (195, 'Christopher Finley', 26, 'christopherfinley32', 'Brazil', 1772);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (196, 'Karen Williams', 38, 'karenwilliams654', 'South Korea', 897);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (197, 'Judy Wood', 38, 'judywood380', 'Japan', 6678);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (198, 'Samantha Walker', 54, 'samanthawalker600', 'Brazil', 6273);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (199, 'Michael Walker', 51, 'michaelwalker322', 'USA', 5018);
+
+1 row created.
+
+SQL> INSERT INTO Players (PlayID, Pname, Age, PUser, PCountry, TotalHoursPlayed) VALUES (200, 'Michelle Carson', 60, 'michellecarson9', 'Germany', 60);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> --Ownership Table
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (1, 60);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (2, 71);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (3, 56);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (4, 6);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (5, 93);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (6, 84);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (7, 81);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (8, 91);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (9, 92);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (10, 38);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (11, 37);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (12, 74);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (13, 13);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (14, 25);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (15, 12);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (16, 49);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (17, 51);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (18, 41);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (19, 90);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (20, 28);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (21, 66);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (22, 33);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (23, 18);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (24, 39);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (25, 66);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (26, 57);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (27, 19);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (28, 56);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (29, 34);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (30, 33);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (31, 10);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (32, 41);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (33, 31);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (34, 52);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (35, 40);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (36, 95);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (37, 76);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (38, 47);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (39, 61);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (40, 91);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (41, 52);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (42, 100);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (43, 4);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (44, 16);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (45, 96);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (46, 19);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (47, 57);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (48, 92);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (49, 63);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (50, 94);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (51, 19);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (52, 74);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (53, 67);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (54, 99);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (55, 36);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (56, 9);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (57, 71);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (58, 51);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (59, 85);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (60, 91);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (61, 93);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (62, 22);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (63, 44);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (64, 83);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (65, 100);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (66, 88);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (67, 20);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (68, 60);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (69, 75);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (70, 67);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (71, 42);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (72, 90);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (73, 98);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (74, 80);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (75, 47);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (76, 92);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (77, 61);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (78, 69);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (79, 69);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (80, 5);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (81, 28);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (82, 63);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (83, 67);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (84, 96);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (85, 95);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (86, 85);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (87, 83);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (88, 42);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (89, 77);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (90, 79);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (91, 52);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (92, 46);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (93, 100);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (94, 23);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (95, 6);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (96, 46);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (97, 55);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (98, 96);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (99, 54);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (100, 61);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (101, 98);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (102, 77);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (103, 19);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (104, 39);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (105, 52);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (106, 5);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (107, 86);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (108, 25);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (109, 5);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (110, 28);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (111, 41);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (112, 2);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (113, 98);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (114, 70);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (115, 52);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (116, 50);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (117, 30);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (118, 85);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (119, 85);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (120, 30);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (121, 53);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (122, 5);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (123, 63);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (124, 93);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (125, 100);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (126, 46);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (127, 12);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (128, 78);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (129, 27);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (130, 57);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (131, 78);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (132, 89);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (133, 54);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (134, 2);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (135, 7);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (136, 25);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (137, 10);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (138, 99);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (139, 96);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (140, 45);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (141, 21);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (142, 90);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (143, 92);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (144, 37);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (145, 75);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (146, 81);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (147, 85);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (148, 85);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (149, 32);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (150, 28);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (151, 1);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (152, 60);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (153, 26);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (154, 96);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (155, 35);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (156, 36);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (157, 86);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (158, 12);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (159, 16);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (160, 47);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (161, 82);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (162, 58);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (163, 60);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (164, 2);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (165, 22);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (166, 5);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (167, 11);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (168, 88);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (169, 36);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (170, 38);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (171, 61);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (172, 57);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (173, 4);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (174, 94);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (175, 95);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (176, 14);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (177, 67);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (178, 66);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (179, 55);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (180, 4);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (181, 65);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (182, 34);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (183, 81);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (184, 68);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (185, 99);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (186, 55);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (187, 16);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (188, 51);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (189, 27);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (190, 36);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (191, 43);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (192, 47);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (193, 75);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (194, 47);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (195, 52);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (196, 98);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (197, 30);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (198, 37);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (199, 36);
+
+1 row created.
+
+SQL> INSERT INTO Ownership (PlayID, GamesOwned) VALUES (200, 92);
+
+1 row created.
+
+SQL> 
+SQL> --Player Ownership Table
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (1, 44);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (2, 7);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (3, 37);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (4, 23);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (5, 37);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (6, 30);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (7, 39);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (8, 115);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (9, 94);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (10, 166);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (11, 182);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (12, 68);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (13, 116);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (14, 84);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (15, 68);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (16, 159);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (17, 124);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (18, 131);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (19, 113);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (20, 73);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (21, 111);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (22, 99);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (23, 22);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (24, 40);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (25, 57);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (26, 170);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (27, 2);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (28, 148);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (29, 121);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (30, 36);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (31, 45);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (32, 117);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (33, 29);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (34, 24);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (35, 180);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (36, 115);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (37, 20);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (38, 97);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (39, 197);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (40, 2);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (41, 72);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (42, 119);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (43, 143);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (44, 104);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (45, 22);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (46, 57);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (47, 40);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (48, 140);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (49, 138);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (50, 84);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (51, 94);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (52, 109);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (53, 17);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (54, 66);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (55, 23);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (56, 58);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (57, 135);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (58, 124);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (59, 121);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (60, 92);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (61, 53);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (62, 108);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (63, 180);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (64, 149);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (65, 154);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (66, 126);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (67, 21);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (68, 64);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (69, 186);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (70, 64);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (71, 144);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (72, 69);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (73, 67);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (74, 13);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (75, 185);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (76, 149);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (77, 38);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (78, 162);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (79, 15);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (80, 109);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (81, 71);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (82, 199);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (83, 147);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (84, 149);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (85, 18);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (86, 131);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (87, 190);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (88, 135);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (89, 171);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (90, 43);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (91, 71);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (92, 98);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (93, 174);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (94, 191);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (95, 48);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (96, 42);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (97, 99);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (98, 151);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (99, 82);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (100, 51);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (101, 101);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (102, 179);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (103, 20);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (104, 59);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (105, 1);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (106, 56);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (107, 146);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (108, 193);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (109, 39);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (110, 4);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (111, 61);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (112, 97);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (113, 119);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (114, 149);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (115, 17);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (116, 60);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (117, 24);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (118, 198);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (119, 88);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (120, 158);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (121, 172);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (122, 108);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (123, 29);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (124, 7);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (125, 126);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (126, 93);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (127, 105);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (128, 166);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (129, 195);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (130, 62);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (131, 198);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (132, 110);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (133, 25);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (134, 15);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (135, 171);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (136, 79);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (137, 157);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (138, 59);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (139, 139);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (140, 178);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (141, 65);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (142, 53);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (143, 13);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (144, 20);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (145, 75);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (146, 4);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (147, 24);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (148, 112);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (149, 153);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (150, 94);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (151, 24);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (152, 47);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (153, 38);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (154, 133);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (155, 23);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (156, 93);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (157, 169);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (158, 44);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (159, 86);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (160, 126);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (161, 129);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (162, 177);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (163, 200);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (164, 79);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (165, 53);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (166, 75);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (167, 48);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (168, 97);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (169, 79);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (170, 155);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (171, 121);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (172, 165);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (173, 121);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (174, 122);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (175, 33);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (176, 57);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (177, 110);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (178, 23);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (179, 71);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (180, 188);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (181, 190);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (182, 139);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (183, 97);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (184, 141);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (185, 162);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (186, 62);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (187, 65);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (188, 85);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (189, 137);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (190, 23);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (191, 78);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (192, 126);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (193, 78);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (194, 24);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (195, 172);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (196, 123);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (197, 49);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (198, 79);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (199, 35);
+
+1 row created.
+
+SQL> INSERT INTO PlayerGameOwnership (PlayID, GID) VALUES (200, 85);
+
+1 row created.
+
+SQL> 
+SQL> @U:\VGDatabase\query_VGData.sql
+SQL> --Top 3 most owned games
+SQL> SELECT G.Gname, COUNT(*) AS OwnershipCount
+  2  FROM Games G
+  3  JOIN PlayerGameOwnership PGO ON G.GID = PGO.GID
+  4  GROUP BY G.Gname
+  5  ORDER BY OwnershipCount DESC
+  6  FETCH FIRST 3 ROWS ONLY;
+
+GNAME                                                                                                OWNERSHIPCOUNT     
+---------------------------------------------------------------------------------------------------- --------------     
+Super Smash Bros. Brawl                                                                                           5     
+Mario Kart 64                                                                                                     5     
+Persona 5 Strikers                                                                                                4     
+
+SQL> 
+SQL> 
+SQL> --Top 5 games with the lowest rating
+SQL> SELECT G.Gname, R.Rating
+  2  FROM Games G
+  3  JOIN GameRatings R ON G.GID = R.GID
+  4  ORDER BY R.Rating ASC
+  5  FETCH FIRST 5 ROWS ONLY;
+
+GNAME                                                                                                    RATING         
+---------------------------------------------------------------------------------------------------- ----------         
+Super Mario Galaxy                                                                                            6         
+Splatoon 2                                                                                                    6         
+Mario Kart 8 Deluxe                                                                                           6         
+Super Mario World                                                                                             6         
+Super Mario Odyssey                                                                                           6         
+
+SQL> 
+SQL> 
+SQL> --Games ran on the Playstation 4
+SQL> SELECT G.Gname
+  2  FROM Games G
+  3  JOIN Platforms P ON G.PlatID = P.PlatID
+  4  WHERE P.PlatID = 4;
+
+GNAME                                                                                                                   
+----------------------------------------------------------------------------------------------------                    
+Grand Theft Auto V                                                                                                      
+Red Dead Redemption 2                                                                                                   
+God of War (2018)                                                                                                       
+Titanfall 2                                                                                                             
+Star Wars Jedi: Fallen Order                                                                                            
+Call of Duty: Infinite Warfare                                                                                          
+Call of Duty: Modern Warfare (2019)                                                                                     
+Persona 5                                                                                                               
+Persona 5 Royal                                                                                                         
+Dark Souls III                                                                                                          
+Bloodborne                                                                                                              
+
+GNAME                                                                                                                   
+----------------------------------------------------------------------------------------------------                    
+Uncharted 4: A Thief's End                                                                                              
+The Last of Us Part II                                                                                                  
+Uncharted: The Lost Legacy                                                                                              
+Dragon Age: Inquisition                                                                                                 
+Mass Effect: Andromeda                                                                                                  
+Fallout 4                                                                                                               
+Fallout 76                                                                                                              
+
+18 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Top 2 Games made by Blizzard Entertainment that have made the most revenue
+SQL> SELECT G.Gname, S.revenue
+  2  FROM Games G
+  3  JOIN Developers D ON G.DevID = D.DevID
+  4  JOIN GameSales S ON G.GID = S.GID
+  5  WHERE D.DevID = 7
+  6  ORDER BY S.revenue DESC
+  7  FETCH FIRST 2 ROWS ONLY;
+
+GNAME                                                                                                   REVENUE         
+---------------------------------------------------------------------------------------------------- ----------         
+Warcraft II: Tides of Darkness                                                                           5326.8         
+World of Warcraft: The Burning Crusade                                                                     4572         
+
+SQL> 
+SQL> 
+SQL> --Top 5 Games by revenue
+SQL> SELECT G.Gname, S.revenue
+  2  FROM Games G
+  3  JOIN GameSales S ON G.GID = S.GID
+  4  ORDER BY S.revenue DESC
+  5  FETCH FIRST 5 ROWS ONLY;
+
+GNAME                                                                                                   REVENUE         
+---------------------------------------------------------------------------------------------------- ----------         
+God of War (2018)                                                                                          5922         
+Halo Wars 2                                                                                              5914.2         
+Uncharted 4: A Thief's End                                                                               5831.4         
+Mario Kart 8 Deluxe                                                                                      5820.6         
+Grand Theft Auto IV                                                                                      5818.2         
+
+SQL> 
+SQL> 
+SQL> --The game made by Epic Games that have sold the most units
+SQL> SELECT G.Gname, S.unitsSold
+  2  FROM Games G
+  3  JOIN Developers D ON G.DevID = D.DevID
+  4  JOIN GameSales S ON G.GID = S.GID
+  5  WHERE D.DevID = 6
+  6  ORDER BY S.unitsSold DESC
+  7  FETCH FIRST 1 ROW ONLY;
+
+GNAME                                                                                                 UNITSSOLD         
+---------------------------------------------------------------------------------------------------- ----------         
+Infinity Blade                                                                                            86.38         
+
+SQL> 
+SQL> 
+SQL> --Top 5 Players with the most hours played in the USA
+SQL> SELECT P.Pname, P.TotalHoursPlayed
+  2  FROM Players P
+  3  WHERE P.PCountry = 'USA'
+  4  ORDER BY P.TotalHoursPlayed DESC
+  5  FETCH FIRST 5 ROWS ONLY;
+
+PNAME                                                                                                TOTALHOURSPLAYED   
+---------------------------------------------------------------------------------------------------- ----------------   
+John Cooper                                                                                                      9278   
+Melissa Nguyen                                                                                                   8605   
+Kristen Brown                                                                                                    8563   
+Hunter Aguirre                                                                                                   7609   
+Brandi Phillips                                                                                                  7601   
+
+SQL> 
+SQL> 
+SQL> --Oldest Game Developers
+SQL> SELECT D.Dname, D.yearFounded
+  2  FROM Developers D
+  3  ORDER BY D.yearFounded ASC
+  4  FETCH FIRST 5 ROWS ONLY;
+
+DNAME                                                                                                YEARFOUNDED        
+---------------------------------------------------------------------------------------------------- -----------        
+Nintendo                                                                                                    1889        
+Naughty Dog                                                                                                 1984        
+Atlus                                                                                                       1986        
+FromSoftware                                                                                                1986        
+Epic Games                                                                                                  1991        
+
+SQL> 
+SQL> 
+SQL> --Games Released After 2019
+SQL> SELECT G.Gname, G.releaseDate
+  2  FROM Games G
+  3  WHERE G.releaseDate > TO_DATE('2019-01-01', 'YYYY-MM-DD');
+
+GNAME                                                                                                RELEASEDA          
+---------------------------------------------------------------------------------------------------- ---------          
+Animal Crossing: New Horizons                                                                        20-MAR-20          
+Cyberpunk 2077                                                                                       10-DEC-20          
+God of War Ragnar??k                                                                                 09-NOV-22          
+Minecraft Dungeons                                                                                   26-MAY-20          
+Overwatch 2                                                                                          04-OCT-22          
+Apex Legends                                                                                         04-FEB-19          
+Star Wars Jedi: Fallen Order                                                                         15-NOV-19          
+Call of Duty: Modern Warfare (2019)                                                                  25-OCT-19          
+Hades                                                                                                17-SEP-20          
+Persona 5 Royal                                                                                      31-OCT-19          
+Persona 5 Strikers                                                                                   20-FEB-20          
+
+GNAME                                                                                                RELEASEDA          
+---------------------------------------------------------------------------------------------------- ---------          
+Sekiro: Shadows Die Twice                                                                            22-MAR-19          
+Elden Ring                                                                                           25-FEB-22          
+The Last of Us Part II                                                                               19-JUN-20          
+Halo Infinite                                                                                        08-DEC-21          
+Half-Life: Alyx                                                                                      23-MAR-20          
+Dota Underlords                                                                                      20-JUN-19          
+
+17 rows selected.
+
+SQL> 
+SQL> 
+SQL> --Average Game Rating by Developer
+SQL> SELECT D.Dname, ROUND(AVG(R.Rating), 2) AS AvgRating
+  2  FROM Developers D
+  3  JOIN Games G ON D.DevID = G.DevID
+  4  JOIN GameRatings R ON G.GID = R.GID
+  5  GROUP BY D.Dname
+  6  ORDER BY AvgRating DESC;
+
+DNAME                                                                                                 AVGRATING         
+---------------------------------------------------------------------------------------------------- ----------         
+ConcernedApe                                                                                                 10         
+CD Projekt Red                                                                                              9.2         
+Respawn Entertainment                                                                                       8.5         
+BioWare                                                                                                     8.5         
+Epic Games                                                                                                 8.38         
+Supergiant Games                                                                                           8.25         
+Rockstar Games                                                                                             8.25         
+Bethesda Game Studios                                                                                      8.22         
+Nintendo                                                                                                   8.16         
+Valve                                                                                                      8.13         
+FromSoftware                                                                                                  8         
+
+DNAME                                                                                                 AVGRATING         
+---------------------------------------------------------------------------------------------------- ----------         
+Atlus                                                                                                         8         
+Mojang                                                                                                        8         
+Naughty Dog                                                                                                7.89         
+Infinity Ward                                                                                               7.8         
+Santa Monica Studio                                                                                        7.75         
+Blizzard Entertainment                                                                                     7.73         
+Team Cherry                                                                                                   7         
+343 Industries                                                                                             6.83         
+Matt Makes Games                                                                                              6         
+
+20 rows selected.
+
+SQL> 
+SQL> --Total Games per Platform
+SQL> SELECT P.Gname AS PlatformName, COUNT(*) AS GameCount
+  2  FROM Platforms P
+  3  JOIN Games G ON P.PlatID = G.PlatID
+  4  GROUP BY P.Gname
+  5  ORDER BY GameCount DESC;
+
+PLATFORMNAME                                                                                          GAMECOUNT         
+---------------------------------------------------------------------------------------------------- ----------         
+PC                                                                                                           50         
+PlayStation 4                                                                                                18         
+Xbox 360                                                                                                     17         
+PlayStation 2                                                                                                16         
+PlayStation 3                                                                                                14         
+Nintendo 3DS                                                                                                 10         
+Nintendo Entertainment System (NES)                                                                           9         
+Wii                                                                                                           9         
+PlayStation                                                                                                   7         
+GameCube                                                                                                      7         
+Nintendo Switch                                                                                               6         
+
+PLATFORMNAME                                                                                          GAMECOUNT         
+---------------------------------------------------------------------------------------------------- ----------         
+PlayStation Portable (PSP)                                                                                    5         
+Xbox One                                                                                                      5         
+Xbox                                                                                                          4         
+Nintendo 64                                                                                                   4         
+Nintendo DS                                                                                                   3         
+Game Boy Advance                                                                                              3         
+Super Nintendo Entertainment System (SNES)                                                                    3         
+Game Boy                                                                                                      2         
+PlayStation 5                                                                                                 2         
+iOS                                                                                                           2         
+Wii U                                                                                                         1         
+
+PLATFORMNAME                                                                                          GAMECOUNT         
+---------------------------------------------------------------------------------------------------- ----------         
+PlayStation Vita                                                                                              1         
+Mac OS                                                                                                        1         
+Xbox Series X/S                                                                                               1         
+
+25 rows selected.
+
+SQL> 
+SQL> spool off
